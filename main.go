@@ -35,7 +35,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", cfg.handlerChapter)
 	mux.HandleFunc("/{chapter}", cfg.handlerChapter)
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("/static"))))
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	fmt.Printf("Starting application on port: %d", *port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))
